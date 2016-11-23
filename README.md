@@ -21,7 +21,7 @@ final project kuliah kecerdasan komputasional
 - [x] masukkan dataset pada list
 - [x] baca jumlah baris dan kolom dataset
 - [x] hitung jumlah node pada hidden layer
-- [x] hitung jumlah jalur yang ada pada JST
+- [x] hitung jumlah edge yang akan digunakan pada JST
 - [x] buat list yang berisi list kosong sebanyak jumlah kromosom genetic algorithm
 - [x] generate angka desimal random sebagai elemen kromosom yang nantinya dipakai sebagai weight JST
 - [x] append angka desimal yang sudah dibuat ke list
