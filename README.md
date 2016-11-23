@@ -1,5 +1,9 @@
-# fp-kk
+# Penggabungan Algoritma Jaringan Saraf Tiruan dengan Genetic Algorithm
 final project kuliah kecerdasan komputasional
+
+##detail dataset
+- jumlah atribut: 35 (1 atribut sebagai hasil analisa)
+- jumlah data: 324
 
 ##prosedur
 1. hitung jumlah node pada hidden layer
@@ -21,12 +25,12 @@ final project kuliah kecerdasan komputasional
 - [x] buat list yang berisi list kosong sebanyak jumlah kromosom genetic algorithm
 - [x] generate angka desimal random sebagai elemen kromosom yang nantinya dipakai sebagai weight JST
 - [x] append angka desimal yang sudah dibuat ke list
-- [] hitung summation input layer dengan hidden layer
-- [] hitung fungsi aktivasi tiap hidden layer
-- [] hitung summation hidden layer dengan output layer
-- [] hitung fungsi aktivasi output layer
-- [] hitung error hasil output layer dengan jawaban pada dataset
-- [] hitung MSE dari setiap kromosom
-- [] ambil 10 kromosom dengan MSE terkecil
-- [] kosongkan list 90 kromosom yang tidak dipilih
-- [] kembang-biakkan 10 kromosom yang diambil sehingga kembali berjumlah 100
+- [ ] hitung summation input layer dengan hidden layer
+- [ ] hitung fungsi aktivasi tiap hidden layer
+- [ ] hitung summation hidden layer dengan output layer
+- [ ] hitung fungsi aktivasi output layer
+- [ ] hitung error hasil output layer dengan jawaban pada dataset
+- [ ] hitung MSE dari setiap kromosom
+- [ ] ambil 10 kromosom dengan MSE terkecil
+- [ ] kosongkan list 90 kromosom yang tidak dipilih
+- [ ] kembang-biakkan 10 kromosom yang diambil sehingga kembali berjumlah 100
