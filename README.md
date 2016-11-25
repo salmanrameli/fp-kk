@@ -9,12 +9,10 @@ final project kuliah kecerdasan komputasional
 1. hitung jumlah node pada hidden layer
 2. generate Y kromosom yang berisi angka random sebaga weight pada JST
 3. masukkan elemen setiap kromosom sebagai weight pada JST
-4. hitung errornya menggunakan rumus pada perhitungan selisih output dan target pada backpropagation
-5. 1 kromosom memiliki X (sesuai dengan banyak dataset) nilai error
-5. gunakan metode MSE untuk menentukan error final kromosom, yang nantinya dipakai sebagai atribut pembanding pada genetic algorithm
-6. ambil 10% kromosom dengan error terkecil
-7. kembang-biakkan 10% kromosom ini sampai Y kromosom
-8. ulangi sebanyak yang diperlukan
+4. hitung presentase error tiap kromosom
+5. ambil 10% kromosom dengan error terkecil
+6. kembang-biakkan 10% kromosom ini sampai kembali berjumlah Y kromosom
+7. ulangi sebanyak yang diperlukan
 
 ##progress
 - [x] normalisasi dataset
@@ -31,6 +29,6 @@ final project kuliah kecerdasan komputasional
 - [ ] hitung fungsi aktivasi output layer
 - [ ] hitung error hasil output layer dengan jawaban pada dataset
 - [ ] hitung MSE dari setiap kromosom
-- [ ] ambil 10 kromosom dengan MSE terkecil
+- [ ] ambil 10 kromosom dengan error terkecil
 - [ ] kosongkan list 90 kromosom yang tidak dipilih
 - [ ] kembang-biakkan 10 kromosom yang diambil sehingga kembali berjumlah 100
