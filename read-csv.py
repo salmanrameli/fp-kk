@@ -1,8 +1,10 @@
 import csv
 import random
+import math
 
 rownum = 0
 colnum = 0
+jumlah_kromosom = 5
 
 """buka file csv untuk menghitung jumlah baris dan kolom total"""
 with open('mesothelioma-small.csv', 'rb') as f:
@@ -23,18 +25,17 @@ attributes = (colnum / rownum) - 1
 
 """menghitung jumlah node pada hidden layer"""
 #node = round(float(rownum) / (2 * (float(attributes) + 1)))
-
 node = 1
 
 """menghitung jumlah link yang dibutuhkan antara input layer dengan hidden layer dan hidden layer dengan output layer"""
-jumlah_link = int(node + (attributes * node))
+edge = int(node + (attributes * node))
 
 """print info"""
 print "rownum = " + str(rownum)
 print "colnum = " + str(colnum)
 print "attributes = " + str(attributes)
 print "jumlah node = " + str(node)
-print "jumlah link = " + str(jumlah_link)
+print "jumlah edge = " + str(edge)
 
 """buka file csv untuk dimasukkan ke dalam list"""
 with open('mesothelioma-small.csv', 'rb') as f:
@@ -53,19 +54,29 @@ for a in matrix:
     b += 1
 '''
 
-#print "matrix[0][0] =" + str(matrix[0][0])
-
 """inisialisasi list yang berisi banyak list yang nantinya dipakai untuk menyimpan gen kromosom buatan genetic algorithm"""
-listoflist = [[] for i in range(0,5)]
+kromosom = [[] for i in range(0,10)]
 
 """generate sekumpulan angka random sebagai gen kromosom genetic algorithm"""
-for a in range(5):
-    for b in range(3):
-        angka = random.uniform(1,10)
-        listoflist[a].append(angka)
+for a in range(jumlah_kromosom): #    index baris
+    for b in range(attributes): #    index kolom
+        gen = random.uniform(1,10)
+        kromosom[a].append(gen)
 
-"""contoh akses elemen list"""
-print listoflist
-print listoflist[0]
-print listoflist[0][0]
-print listoflist[0][1]
+x = 0
+y = 0
+summation = 0
+indexa = 1
+
+for x in range(jumlah_kromosom):
+    for a in range(rownum):
+        for b in range(attributes):
+            summation = 0
+            hasil = float(matrix[a][b]) * kromosom[x][b]
+            summation += hasil
+
+        print "summation " + str(indexa) + ": " + str(summation)
+        aktivasi = 1 / (1 + math.exp(-1 * summation))
+
+        print "aktivasi " + str(indexa) + ": " + str(aktivasi)
+        indexa += 1
