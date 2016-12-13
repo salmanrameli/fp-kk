@@ -8,14 +8,12 @@ A. Spesifikasi Program
 	a) Dataset		: Menggunakan data diagnosa penyakit mesothelioma
 	
 '''
-
 #!/usr/bin/python
 import random
 import csv
 import math
 import operator
-
-
+import time
 
 class Kromosom :
 	jumlah_gen =0
@@ -35,6 +33,9 @@ class Kromosom :
 	def random_gens(self):
 		for i in range(0,self.jumlah_gen):
 			self.gens.append(random.uniform(0, 1))
+	def set_gens(self,inputs):
+		for i in range(0,self.jumlah_gen):
+			self.gens.append(inputs[i])
 	def print_gen(self):
 		for gen in self.gens:
 			print(gen)
@@ -173,6 +174,23 @@ def selection_rank():
 	kromosoms.sort(key=lambda x: x.error)
 	for i in range(jumlah_parent,len(kromosoms)):
 		del kromosoms[-1]	
+#Algoritma seleksi metode random
+def selection_random():
+	'''
+	Algortima - >
+	Seleksi dilakukan dengan cara :
+	1. Random sebuah angka, disimpan dalam variabel i
+	2. Pilih kromosom ke-i menjadi parent
+	
+	'''	
+
+	global kromosoms
+	i=random.randint(0, (len(kromosoms)-1))
+	parent=kromosoms[i]
+	for i in range(len(kromosoms)):
+		del kromosoms[-1]	
+	
+	kromosoms.append(parent)
 
 #Algoritma seleksi metode tournament		
 def selection_tournament():
@@ -286,8 +304,10 @@ def reproduction_inversion_mutation():
 #Main proses algoritma GA		
 def ga_process():
 	global kromosoms
-	selection_tournament()
+	
+	#selection_tournament()
 	#selection_rank()
+	selection_random()
 	
 	#reproduction_boundary_mutation()
 	#reproduction_swap_mutation()
@@ -299,6 +319,7 @@ def inisialitation():
 	init_inputs()
 	init_kromosoms()
 	init_jst()	
+
 #Fungsi Main proses 	
 def process():
 	global kromosoms
@@ -309,7 +330,8 @@ def process():
 	tresshold=0
 	kelas=[]
 	kelas_sebenarnya=[]
-	
+		
+	start = time.time()
 	for a in range(0,iterasi_ga_jst):
 		# Proses JST -> hitung output -> hitung error tiap kromosom
 		print("Iterasi-ke "+str(a+1))
@@ -334,13 +356,16 @@ def process():
 	
 		#Proses GA ->Seleksi dan replikasi
 		ga_process()
-		for kromosom in kromosoms:
-			print kromosom.gens
-			print(kromosom.error)
-		#print(kromosoms[0].gens)
-		#print(kromosoms[0].error)
+		
+		#for kromosom in kromosoms:
+		#	print kromosom.gens
+		#	print(kromosom.error)
+		print(kromosoms[0].gens)
+		print(kromosoms[0].error)
+	end = time.time()
+	print ("Waktu Eksekusi = " + str(end - start) + " detik")
 if __name__=='__main__':	
-	iterasi_ga_jst=30
+	iterasi_ga_jst=2
 	jumlah_atribut=0
 	jumlah_data_belajar=150
 	jumlah_kromosom=jumlah_data_belajar
