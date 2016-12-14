@@ -1,11 +1,11 @@
 # Penggabungan Algoritma Jaringan Saraf Tiruan dengan Genetic Algorithm
 final project kuliah kecerdasan komputasional
 
-##detail dataset
+##Detail dataset
 - jumlah atribut: 35 (1 atribut sebagai hasil analisa)
 - jumlah data: 324
 
-##prosedur
+##Prosedur
 1. hitung jumlah node pada hidden layer
 2. generate Y kromosom yang berisi angka random sebaga weight pada JST
 3. masukkan elemen setiap kromosom sebagai weight pada JST
