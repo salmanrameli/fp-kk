@@ -25,6 +25,7 @@ class Kromosom :
 		
 		self.init_jumlah_gen()
 		self.random_gens()
+		#self.set_gens(inputs)
 	def init_jumlah_gen(self):
 		global jumlah_atribut
 		global jumlah_node_hidden
@@ -35,7 +36,7 @@ class Kromosom :
 			self.gens.append(random.uniform(0, 1))
 	def set_gens(self,inputs):
 		for i in range(0,self.jumlah_gen):
-			self.gens.append(inputs[i])
+			self.gens[i]=inputs[i]
 	def print_gen(self):
 		for gen in self.gens:
 			print(gen)
@@ -148,8 +149,19 @@ def init_inputs():
 def init_kromosoms():
 	global kromosoms
 	global jumlah_kromosom
+	global database_gens
 	for i in range(0,jumlah_kromosom):
 		kromosoms.append(Kromosom())
+		kromosoms[-1].set_gens(database_gens[i])
+
+
+def init_database_gens():
+	global database_gens
+	
+	# Baca CSV file , kemudian dimasukkan ke var database_gens yg berbrntuk matriks 2d
+	f = open('database_gens.csv')
+	csv_f = csv.reader(f)
+	database_gens=list(csv_f)
 
 #Fungsi Inisialisasi JST
 def init_jst():
@@ -280,6 +292,8 @@ def reproduction_inversion_mutation():
 		if (index_copy>(jumlah_parent-1)):
 			index_copy=0
 		kromosoms.append(Kromosom())
+		
+		#Mencopy Gen child dari gen parent
 		for j in range(kromosoms[index_copy].jumlah_gen):
 			#print kromosoms[-1].gens[i]
 			kromosoms[-1].gens[j] = kromosoms[index_copy].gens[j]
@@ -316,6 +330,7 @@ def ga_process():
 
 #Fungsi main Inisialisais
 def inisialitation():
+	init_database_gens()
 	init_inputs()
 	init_kromosoms()
 	init_jst()	
@@ -334,7 +349,7 @@ def process():
 	start = time.time()
 	for a in range(0,iterasi_ga_jst):
 		# Proses JST -> hitung output -> hitung error tiap kromosom
-		print("Iterasi-ke "+str(a+1))
+		###print("Iterasi-ke "+str(a+1))
 		for i in range(0,len(kromosoms)):
 			outputs=[]
 			kelas=[]
@@ -357,29 +372,42 @@ def process():
 		#Proses GA ->Seleksi dan replikasi
 		ga_process()
 		
-		#for kromosom in kromosoms:
-		#	print kromosom.gens
-		#	print(kromosom.error)
-		print(kromosoms[0].gens)
-		print(kromosoms[0].error)
+		###for kromosom in kromosoms:
+		###	print kromosom.gens
+		###	print(kromosom.error)
+		###print(kromosoms[0].gens)
+		###print(kromosoms[0].error)
+	
+	global output_program
+	output_program.write("Hasil= " + str(kromosoms[0].gens) + "\n")
+	output_program.write("Error= " + str(kromosoms[0].error)+ "% \n")
 	end = time.time()
-	print ("Waktu Eksekusi = " + str(end - start) + " detik")
-if __name__=='__main__':	
-	iterasi_ga_jst=2
+	if((end-start)>=60):
+		output_program.write("Waktu Eksekusi = " + str(int(end)/int(start)) + " menit " +str((end-start)%60) + " detik"+ "\n")
+
+	else:
+		output_program.write("Waktu Eksekusi = " + str(end - start) + " detik"+ "\n")
+	
+if __name__=='__main__':
+	output_program= open('output_program.txt',"w+")
+	
+	iterasi_ga_jst=10
 	jumlah_atribut=0
-	jumlah_data_belajar=150
+	jumlah_data_belajar=100
 	jumlah_kromosom=jumlah_data_belajar
 	
 	inputs=[]
 	inputs.append([])
 	kromosoms=[]
 	jst=JST()
+	
+	database_gens=[]
+	database_gens.append([])
 	#Atribut JST
 	jumlah_node_hidden=5
 	jumlah_node_output=1
 	
-	
+
 	inisialitation()
 	process()
-	
-	
+	output_program.close()
