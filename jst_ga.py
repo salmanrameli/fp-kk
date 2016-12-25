@@ -5,8 +5,8 @@ Anggota Kelompok :
 3. Anugra Pratama (5114100099)
 
 A. Spesifikasi Program
-	a) Dataset		: Menggunakan data diagnosa penyakit mesothelioma
-	
+	a) Dataset: Menggunakan data diagnosa penyakit mesothelioma
+
 '''
 #!/usr/bin/python
 import random
